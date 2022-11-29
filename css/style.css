@@ -2,6 +2,10 @@ body {
     background-color: darkblue;
 }
 
+h1 {
+    color: lightblue;
+}
+
 form {
     font-size: 1.2rem;
     border-radius: 10px;

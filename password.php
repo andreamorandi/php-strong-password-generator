@@ -2,8 +2,13 @@
 require_once __DIR__ . "/partials/functions.php";
 require_once __DIR__ . "/partials/data.php";
 session_start();
-$permitted_chars = set_permitted_chars($_SESSION["letters"], $_SESSION["numbers"], $_SESSION["symbols"],);
-$password = generate_password($_SESSION["strength"], $permitted_chars, $_SESSION["repetition"]);
+if (isset($_SESSION["strength"])) {
+    $permitted_chars = set_permitted_chars($_SESSION["letters"], $_SESSION["numbers"], $_SESSION["symbols"],);
+    $password = generate_password($_SESSION["strength"], $permitted_chars, $_SESSION["repetition"]);
+    unset($_SESSION["strength"]);
+} else {
+    header("Location: ./index.php");
+}
 ?>
 
 <!DOCTYPE html>

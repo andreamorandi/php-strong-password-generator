@@ -3,9 +3,9 @@ function generate_password($strength, $pool, $repetition)
 {
     $pool_length = strlen($pool);
     $password = "";
-    for ($i = 0; $i < $strength; $i++) {
+    while (strlen($password) < $strength) {
         $char = $pool[rand(0, $pool_length - 1)];
-        if ($repetition || !str_contains($password, $char)) {
+        if ($repetition === "true" || !str_contains($password, $char)) {
             $password .= $char;
         }
     }

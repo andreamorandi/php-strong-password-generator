@@ -1,14 +1,15 @@
 <?php
 session_start();
 $strength = $_GET["strength"] ?? "";
-if (!empty($strength)) {
+$alert = false;
+if (!empty($strength) && $strength >= 8 && $strength <= 35) {
     $_SESSION["strength"] = $strength;
     $_SESSION["repetition"] = $_GET["repetition"];
     $_SESSION["letters"] = $_GET["letters"] ?? false;
     $_SESSION["numbers"] = $_GET["numbers"] ?? false;
     $_SESSION["symbols"] = $_GET["symbols"] ?? false;
     header("Location: ./password.php");
-} else if (isset($strength)) {
+} else if (isset($_GET["strength"])) {
     $alert = true;
 }
 ?>
@@ -29,7 +30,7 @@ if (!empty($strength)) {
 
 <body>
     <header>
-        <h1 class="text-secondary text-center my-4">Strong Password Generator</h1>
+        <h1 class="text-center my-4">Strong Password Generator</h1>
         <h2 class="text-white text-center my-4">Genera una password sicura</h2>
     </header>
     <main>
@@ -38,7 +39,7 @@ if (!empty($strength)) {
             if ($alert) {
                 echo '
                         <div class="alert alert-info" role="alert">
-                            Nessun parametro valido inserito
+                            Inserire lunghezza compresa tra 8 e 35 caratteri
                         </div>
                     ';
             }
@@ -52,9 +53,9 @@ if (!empty($strength)) {
                 <div class="d-flex justify-content-between mt-3">
                     <p>Consenti ripetizioni di uno o più caratteri:</p>
                     <div class="form-check password-features">
-                        <input type="radio" id="rep_true" name="repetition" value=true checked class="form-check-input">
+                        <input type="radio" id="rep_true" name="repetition" value="true" checked class="form-check-input">
                         <label for="rep_true" class="form-label">Sì</label><br>
-                        <input type="radio" id="rep_false" name="repetition" value=false class="form-check-input">
+                        <input type="radio" id="rep_false" name="repetition" value="false" class="form-check-input">
                         <label for="rep_false" class="form-label">No</label><br>
                         <input type="checkbox" id="letters" name="letters" value="true" class="form-check-input">
                         <label for="letters" class="form-check-label"> Lettere</label><br>
